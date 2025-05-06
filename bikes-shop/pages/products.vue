@@ -26,25 +26,6 @@ const subTitle = computed(() => getSelectedTitle(id.value, subId.value))
             </h1>
          </v-col>
       </v-row>
-      <v-row v-if="subId == undefined" class="mx-16">
-         <v-col cols="3" v-for="(s, i) in category.subcats" :key="i">
-            <nuxt-link :to="`/products?id=${category.category}&subcat=${i+1}`" style="text-decoration: none !important;">
-               <v-card class="ma-6">
-                  <template v-slot:prepend>
-                     <v-avatar 
-                       :image="`/images/categories/img_${category.category}_${i+1}.webp`"
-                       style="width: 13vw;height: auto;"
-                       rounded="1"
-                    >
-                    </v-avatar>
-                  </template>
-                  <v-card-subtitle style="font-weight: 400;text-align: center;  white-space: initial !important;">
-                     {{ s }}
-                  </v-card-subtitle>
-               </v-card>
-            </nuxt-link>
-         </v-col>
-      </v-row>
       <v-row v-if="products.length == 0"  class="mx-16">
          <v-col cols="12">
             <h1 style="text-align: center; color: #e1ac00;font-weight:400;letter-spacing:3px;">
@@ -54,15 +35,14 @@ const subTitle = computed(() => getSelectedTitle(id.value, subId.value))
       </v-row>
       <v-row v-else  class="mx-16">   
          <v-col cols="3" v-for="(item, i) in products" :key="i">
-            <nuxt-link :to="`/itemProd?toy=${item.code}`" style="text-decoration: none !important;">
+            <nuxt-link :to="`/BikeProdukt?bike=${item.code}`" style="text-decoration: none !important;">
                <v-card class="ma-6">
                   <template v-slot:prepend>
-                     <v-avatar 
-                       :image="`/images/products/${item.code}_0.webp`"
-                       style="width: 13vw; height: auto;"
-                       rounded="1"
+                     <v-img 
+                       :src="`/small_images/${item.index}.png`"
+                       style="width: 13vw; height: 10vh;"
                     >
-                    </v-avatar>
+                    </v-img>
                   </template>
                   <v-card-subtitle style="font-weight: 400;text-align: center;  white-space: initial !important;">
                      {{ item.title }}

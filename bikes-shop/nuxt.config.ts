@@ -13,7 +13,7 @@ export default defineNuxtConfig({
             { name: 'viewport', content: 'width=device-width, initial-scale=1' }
           ],
       link: [{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=EB Garamond' },
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com" },
       { rel: 'stylesheet', href: "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" },

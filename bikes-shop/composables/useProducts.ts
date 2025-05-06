@@ -1,41 +1,46 @@
-import categories_json from './data/categories.json'
-import products_json from './data/product_baza_with_sale.json'
+import categories_json from './data/mainList.json'
+import products_json from './data/products.json'
 
-interface category {
-  title : string
-  subcats : string[]
+
+interface Category {
+  ua : string
+  en: string
+  short : string
+  list? : string[]
 }
 
-interface cat_object {
-  [key: string]: category
+interface Cat_object {
+  [key: string]: Category
 }
 
-interface product {
-  code: string
-  cat : string
-  subcat : string
+interface Feature {
+  td: string
+  th: string
+}
+
+interface Product {
+  index: string
+  category : string
   title : string
   price : string
   description : string
-  target : string[]
-  specs : Array<string[]>
-  age : string[]
-  imgs: number
-  sale: number 
+  features : Feature[]
+
 }
 
-interface product_object {
-  [key: string]: product
+interface Product_object {
+  [key: string]: Product
 }
 
-const categories = categories_json as unknown as cat_object
-const products = products_json as unknown as product_object
+const categories = categories_json as unknown as Cat_object
+const products = products_json as unknown as Product_object
 
 
 
 interface keyable {
   [key: string]: any
 }
+
 let index: string | any = "1"
 let filter = {
   who: "any",
@@ -48,7 +53,7 @@ const useProducts = () => {
 
 const getCategoriesList = () : Array<string> => {
   const list : Array<string> = Object.keys(categories)
-  return list.map(((item : string) => categories[item].title))
+  return list.map(((item : string) => categories[item].ua))
   
 }
 const getCategory = (i : any) => {
@@ -100,17 +105,11 @@ const getSelectedTitle = (i : any, j : any) : string => {
 
   if (i.length > 4) {// "filter"
     if (filter.sale) return "Акційні пропозиції"
-    let result = "Іграшки для "
-        result += (filter.who == "any")   ? "дітей"   :
-                  (filter.who == "baby")  ? "малюків" :
-                  (filter.who == "girls") ? "дівчат"  : "хлопчиків"
-
-        if (filter.ages.length > 0) 
-            result += ' віком ' + filter.ages.join()
+    let result = "Всі товари"
         return result
   }
-  else if (j == undefined) return categories[i].title
-  return categories[i].subcats[parseInt(j)-1]
+  else if (j == undefined) return categories[i].ua
+  return categories[i].list[parseInt(j)-1]
 
 
 }
@@ -130,13 +129,10 @@ const ProdGetDetails = (key : string) => {
   const images = [key + '_0.webp']
   for (let i = 0; i < count - 1; i++) images.push(key + '_' + (i+1) + '.webp')
 
-const target = products[key].target
-const whom = target.join(', ').replace('boys', 'хлопчикам').replace('girls', 'дівчатам').replace('baby', 'малюкам')
-const ages = products[key].age.join(', ')
-const specs : Array<string[]> = [...products[key].specs] //!!!shallow copy
-specs.push(["Для кого:", whom])
-specs.push(["Вік:", ages])
-console.log( images, specs, products[key].specs )
+const target = ""
+const whom = ""
+const specs : Array<string[]> = [...products[key].features] //!!!shallow copy
+console.log( images, specs, products[key].features )
 
   return { images, specs }
 }
@@ -152,7 +148,7 @@ const ProdSearch = (key : string) => {
   if (key == undefined || key.length == 0) return []
   // console.log("ProdSearch", Object.keys(list))
   const k = key.toLowerCase()
-  return Object.keys(categories).map(elem => categories[elem].title).filter(elem => elem.toLowerCase().includes(k))
+  return Object.keys(categories).map(elem => categories[elem].en).filter(elem => elem.toLowerCase().includes(k))
 }
 
 const setFilter = (mode : string, value : any) => {

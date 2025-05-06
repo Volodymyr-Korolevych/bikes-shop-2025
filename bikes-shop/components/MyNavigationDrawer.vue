@@ -10,10 +10,10 @@ const _prod = (i: any) => {
     <v-navigation-drawer permanent expand-on-hover rail width="350">
         <v-list>
             <v-list-item 
-            title="Категорії">
+            title="Асортимент велосипедів">
             <template v-slot:prepend>
                      <v-avatar 
-                       image="/favicon.png"
+                       image="/favicon.ico"
                        rounded="0"
                     >
                     </v-avatar>

@@ -1,0 +1,68 @@
+[
+    {
+        "id": 0,
+        "en": "hirski-velosypedy",
+        "ua": "Гірські велосипеди",
+        "short": "Гірські"
+    },
+    {
+        "id": 1,    
+        "en": "miski-velosypedy",
+        "ua": "Міські велосипеди",
+        "short": "Міські"
+    },
+    {
+        "id": 2,
+        "en": "skladni-velosypedy",
+        "ua": "Складані велосипеди",
+        "short": "Складані"
+    },
+    {
+        "id": 3,
+        "en": "turystychni-velosypedy-hibryd",
+        "ua": "Туристичні гібридні велосипеди",
+        "short": "Туристичні"
+    },
+    {
+        "id": 4,
+        "en": "pidlitkovi-velosypedy",
+        "ua": "Підліткові велосипеди",
+        "short": "Підліткові"
+    },
+    {
+        "id": 5,
+        "en": "zhinochi-velosypedy",
+        "ua": "Жіночі велосипеди",
+        "short": "Жіночі"
+    },
+    {
+        "id": 6,
+        "ua": "Аксесуари",
+        "list": [
+            {
+                "en": "flyagi",
+                "ua": "Фляги"
+            },
+            {
+                "en": "krila",
+                "ua": "Крила"
+            },
+            {
+                "en": "velokomputeri",
+                "ua": "Велокомп'ютери"
+            },
+            {
+                "en": "instrumenti",
+                "ua": "Інструменти"
+            },
+            {
+                "en": "velokriplennya-na-avto",
+                "ua": "Велокріплення на авто"
+            },
+            {
+                "en": "komplekty-svitla",
+                "ua": "Комплекти світла"
+            }
+        ]
+    }
+]

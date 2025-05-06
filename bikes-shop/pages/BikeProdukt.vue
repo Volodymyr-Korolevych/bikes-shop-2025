@@ -1,19 +1,19 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'ItemProd'
+  title: 'BikeProdukt'
 })
 const { ProdGetItem, ProdGetDetails } = useProducts()
 const route = useRoute()
 
-const toy = ref('')
+const bike = ref('')
 //id.value = route.query.id as string
-console.log("product/setup", toy.value)
+console.log("product/setup", bike.value)
 
-const item   = computed(() => ProdGetItem(toy.value))
-const details = computed(() => ProdGetDetails(toy.value))
+const item   = computed(() => ProdGetItem(bike.value))
+const details = computed(() => ProdGetDetails(bike.value))
 
-watch(() => route.query.toy,
-  async newY => { toy.value = newY as string }, { immediate: true })
+watch(() => route.query.bike,
+  async newY => { bike.value = newY as string }, { immediate: true })
 </script>
 
 <template>
