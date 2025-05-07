@@ -1,28 +1,21 @@
 <script setup lang="ts">
-const route = useRoute()
-const { getCategory, getCategoryProducts, getSelectedTitle } = useProducts()
 
-const id = ref('')
-id.value = route.query.id as string
-const subId = ref('')
-subId.value = route.query.subcat as string
+const { category, getCategoryProducts } = useProducts()
 
-watch(() => route.query.id,
-   async newId => { id.value = newId as string }, { immediate: true })
-watch(() => route.query.subcat,
-   async newId => { subId.value = newId as string }, { immediate: true })
 
-const category = computed(() => getCategory(id.value))
-const products = computed(() => getCategoryProducts(id.value, subId.value))
-const subTitle = computed(() => getSelectedTitle(id.value, subId.value))
+const watchdog = ref(0)
+watch(category, () => { watchdog.value++ }, { immediate: true })
+
+const products = computed(() => getCategoryProducts(watchdog.value))
 
 </script>
 <template>
    <v-sheet id="s_page">
       <v-row>
+
          <v-col cols="12" class="mt-6">
             <h1 style="text-align: center; color:black;font-size: 28px;font-weight: 400;letter-spacing:1px;">
-               {{ subTitle }}
+               {{ category.ua }}
             </h1>
          </v-col>
       </v-row>
@@ -35,20 +28,7 @@ const subTitle = computed(() => getSelectedTitle(id.value, subId.value))
       </v-row>
       <v-row v-else  class="mx-16">   
          <v-col cols="3" v-for="(item, i) in products" :key="i">
-            <nuxt-link :to="`/BikeProdukt?bike=${item.code}`" style="text-decoration: none !important;">
-               <v-card class="ma-6">
-                  <template v-slot:prepend>
-                     <v-img 
-                       :src="`/small_images/${item.index}.png`"
-                       style="width: 13vw; height: 10vh;"
-                    >
-                    </v-img>
-                  </template>
-                  <v-card-subtitle style="font-weight: 400;text-align: center;  white-space: initial !important;">
-                     {{ item.title }}
-                  </v-card-subtitle>
-               </v-card>
-            </nuxt-link>
+            <product-card :product="item" :key="watchdog" />
          </v-col>
       </v-row>
    </v-sheet>

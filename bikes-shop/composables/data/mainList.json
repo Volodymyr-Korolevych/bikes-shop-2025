@@ -1,42 +1,42 @@
 [
     {
-        "id": 0,
+        "id": 1,
         "en": "hirski-velosypedy",
         "ua": "Гірські велосипеди",
         "short": "Гірські"
     },
     {
-        "id": 1,    
+        "id": 2,    
         "en": "miski-velosypedy",
         "ua": "Міські велосипеди",
         "short": "Міські"
     },
     {
-        "id": 2,
+        "id": 3,
         "en": "skladni-velosypedy",
         "ua": "Складані велосипеди",
         "short": "Складані"
     },
     {
-        "id": 3,
+        "id": 4,
         "en": "turystychni-velosypedy-hibryd",
         "ua": "Туристичні гібридні велосипеди",
         "short": "Туристичні"
     },
     {
-        "id": 4,
+        "id": 5,
         "en": "pidlitkovi-velosypedy",
         "ua": "Підліткові велосипеди",
         "short": "Підліткові"
     },
     {
-        "id": 5,
+        "id": 6,
         "en": "zhinochi-velosypedy",
         "ua": "Жіночі велосипеди",
         "short": "Жіночі"
     },
     {
-        "id": 6,
+        "id": 7,
         "ua": "Аксесуари",
         "list": [
             {

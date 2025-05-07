@@ -1,10 +1,14 @@
 <script setup lang="ts">
-const { getCategoriesList } = useProducts()
+const { setFilter,  getCategoriesList } = useProducts()
 const router = useRouter()
 const categories = getCategoriesList()
-const _prod = (i: any) => {
-    router.push({ path: "/products", query: { id: i.toString() }, replace: true })
+
+const _click = async (i: any) => {
+    console.log('NavigationDrawer click', i)
+    setFilter("tab", i) // Uncommenting the setFilter line
+    await router.push({ path: "/products", replace: true })
 }
+
 </script>
 <template>
     <v-navigation-drawer permanent expand-on-hover rail width="350">
@@ -23,13 +27,13 @@ const _prod = (i: any) => {
         </v-list-item>
         </v-list>
         <v-list density="compact" nav>
-            <v-list-item v-for="(cat, i) in categories" key="i" :title="cat" :value="i" @click="_prod(i + 1)"
+            <v-list-item v-for="(cat, i) in categories" key="i" :title="cat.ua" :value="i" @click="_click(i + 1)"
                     style="white-space: initial !important;">
                 <template v-slot:prepend>
-                    <v-avatar :image="`/images/categories/${i}.svg`" style="max-width: 20px;max-height: 16px;"
-                        rounded="0">
-                    </v-avatar>
-                </template>
+                    <div style="width: 40px;min-height: 16px;"
+                        rounded="0">&nbsp;
+                </div>
+                </template> 
 
             </v-list-item>
         </v-list>

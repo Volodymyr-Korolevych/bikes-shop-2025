@@ -1,29 +1,12 @@
-// import this after install `@mdi/font` package
-import '@mdi/font/css/materialdesignicons.css'
-import DateFnsAdapter from '@date-io/date-fns'
-import { uk }  from 'vuetify/locale'
-import ukUA from 'date-fns/locale/uk'
-import enUS from 'date-fns/locale/en-US'
-
-import "vuetify/styles"
-import '~/assets/styles/settings.scss'
 import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
-
-export default defineNuxtPlugin((app) => {
+export default defineNuxtPlugin(nuxtApp => {
   const vuetify = createVuetify({
-    date: {
-      adapter: DateFnsAdapter,
-      locale: {
-        uk: ukUA,
-        en: enUS,
-      },
-    },
-    locale: {
-      locale: "uk",
-      fallback: "en",
-      messages: { uk }
-    },
+    components,
+    directives,
   })
-  app.vueApp.use(vuetify)
+
+  nuxtApp.vueApp.use(vuetify)
 })

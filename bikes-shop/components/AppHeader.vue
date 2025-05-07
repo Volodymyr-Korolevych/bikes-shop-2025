@@ -1,33 +1,49 @@
 <script setup lang="ts">
+
+
 import { toRaw } from 'vue';
 const router = useRouter()
 const { setFilter } = useProducts()
 const items = ['Всі',  'Гірські', 'Міські', 'Складані', 'Туристичні', 'Підліткові', 'Жіночі']
 const accessories = ['Велосипедні фляги', 'Крила', "Велокомп'ютери", 'Інструменти', 'Велокріплення на авто', 'Комплекти світла']; // Dropdown items
 
+//
+const { cartStatus, activateCart } = useCart() // reactive cart status
+
+// 
 const tab = ref(-1)
 const counter = ref(0)
 const dropdownOpen = ref(false); // Track dropdown state
 
 const _click = () => {
-  console.log('AppBar/click')
-  router.push({ path: "/products",  query: { id: 'filter'+(counter.value++) }, replace: true })}
-
-watch(tab as any, (t) => {
-  console.log('AppBar/tab', t)
-  setFilter("who", t)
-  router.push({ path: "/products",  query: { id: 'filter'+(counter.value++) }, replace: true })
-})
-
+  console.log('AppHeader tab click')
+  setFilter("tab", tab.value)
+  router.push({ path: "/products" , replace: true })
+}
+const acc_click = (index: number) => {
+  console.log('AppHeader accessories tab click')
+  setFilter("acc", index)
+  router.push({ path: "/products",  replace: true })
+}
 
 </script>
 <template>
   <v-app-bar>
-    <template v-slot:image>
-      <v-img gradient="to top right, #fbf3bf, #fbf3bf"></v-img>
-    </template>
-
     <v-app-bar-title class="ml-15" style="color:black;letter-spacing: 8px;">Магазин велосипедів</v-app-bar-title>
+
+
+    <div class="minicart" @click.stop="activateCart(true)">
+        <div class="cart-block" style="cursor: pointer;caret-color: transparent !important;">
+          <svg-cart />
+          <span v-if="cartStatus.count > 0" class="label_count ">{{ cartStatus.count }}</span>
+          <span class="total-price">
+            <span class="cart-text">Кошик: </span>
+            <span class="cart-text">{{ cartStatus.total }} грн</span>
+          </span>
+        </div>
+
+      </div>
+    
 
     <template v-slot:extension>
       <v-tabs  id="tabs_age"  v-model="tab" align-tabs="title" >
@@ -53,8 +69,8 @@ watch(tab as any, (t) => {
         </v-list-item>
         </v-list>
           <v-list density="compact" nav>
-            <v-list-item v-for="(accessory, index) in accessories" :key="index" @click="handleDropdownClick(accessory)">
-              <v-list-item-title>{{ accessory }}</v-list-item-title>
+            <v-list-item v-for="(accessory, index) in accessories" :key="index">
+              <v-list-item-title @click="acc_click(index)">{{ accessory }}</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -83,6 +99,35 @@ watch(tab as any, (t) => {
   font-size: 12px;
   letter-spacing: 1px;
   font-weight: 500;
+}
+.cart-text {
+  text-decoration: none;
+}
+.cart-block {
+  display: flex;
+  position: relative;
+}
+.total-price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+  gap: 5px;
+  font-size: 13px;
+  line-height: 1;
+}
+.label_count {
+  position: absolute;
+  left: 22px;
+  top: -8px;
+  background: #228b22;
+  color: white;
+  border-radius: 17px;
+  line-height: 18px;
+  width: 18px;
+  font-size: 11px;
+  text-align: center;
+  display: block;
 }
 
 </style>

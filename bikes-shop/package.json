@@ -8,12 +8,8 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
-    "@date-io/date-fns": "^3.0.0",
-    "@date-io/dayjs": "^3.0.0",
     "@mdi/font": "^7.4.47",
     "@nuxt/fonts": "^0.7.0",
-    "@nuxtjs/html-validator": "^1.8.2",
-    "date-fns": "^3.6.0",
     "nuxt": "^3.11.2",
     "vue-dompurify-html": "^5.0.1"
   },

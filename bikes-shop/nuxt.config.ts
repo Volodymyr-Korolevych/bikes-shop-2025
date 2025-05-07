@@ -23,18 +23,10 @@ export default defineNuxtConfig({
     }
   },
   devtools: { enabled: true },
-  modules: [
-    '@nuxtjs/html-validator',
-    '@nuxt/fonts',
-    (_options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', (config) => {
-        // @ts-expect-error
-        config.plugins.push(vuetify({ autoImport: true }))
-      })
-    }
-  ],
-  plugins: ['@/plugins/vuetify.ts', '@/plugins/dompurify-html.client.ts'],
-  css: ['~/assets/styles/main.scss'
+  css: [
+    'vuetify/lib/styles/main.sass',
+    '@mdi/font/css/materialdesignicons.min.css',
+    '~/assets/styles/main.scss'
    , '~/assets/styles/gothamPro.css'
 ],
   build: { transpile: ['vuetify'] },
@@ -45,13 +37,9 @@ export default defineNuxtConfig({
       },
     },
   },
-  htmlValidator: {
-    usePrettier: true,
-    logLevel: 'verbose',
-    failOnError: false
-  },
   nitro: {
     logLevel: 'verbose',
     debug: true
-  }
+  },
+  compatibilityDate: '2024-11-02'
 })

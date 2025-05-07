@@ -1,12 +1,12 @@
 <template>
   <v-app>
 
-    <my-app-bar />
-
+    <app-header />
     <v-main>
 <!--       <v-row>
         <v-col cols="1"> -->
-          <my-navigation-drawer />
+          <navigation-drawer />
+          <cart />
 <!--         </v-col>
         <v-col cols="10"> -->
           <NuxtPage />
