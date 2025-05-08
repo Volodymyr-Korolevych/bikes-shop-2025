@@ -2,20 +2,15 @@ import products_json from './data/products.json'
 
 const products = products_json as unknown as Product[]
 
-interface cart_record {
-  id: string
-  quantity: number,
-  price?: number
+declare global {
+  interface CartItem {
+    index: string
+    quantity: number
+    name?: string
+    price: number
+  }
 }
-interface cart_record_output {
-  id: string
-  quantity: number
-  name: string | undefined
-  price: number
-
-}
-
-const Cart: Array<cart_record> = []
+const Cart: Array<CartItem> = []
 const CartValue: number = 0
 
 const cartStatus = ref({count: 0, total: 0}) // reactive status
@@ -29,28 +24,28 @@ const cleaned_price = (price : string | null) =>
 const useCart = () => {
 
   const addItemToCart = (id: string): Boolean => {
-    const item: cart_record | null = Cart.find(elem => elem.id === id) ?? null
+    const item: CartItem | null = Cart.find(elem => elem.index === id) ?? null
     console.log("Add item to Cart", Cart, id, item)
     if (!item) {
       
       const _price : string | null = products.find(e => e.index === id)?.price ?? null
-      Cart.push({ id, quantity: 1, price: cleaned_price(_price) })
+      Cart.push({ index: id, quantity: 1, price: cleaned_price(_price) })
       updateCartStatus()
       return false // record is added
     }
-    Cart.splice(Cart.findIndex(elem => elem.id === id), 1)
+    Cart.splice(Cart.findIndex(elem => elem.index === id), 1)
     updateCartStatus()
 
     return true // record is found in the Cart array
   }
 
   const isItemInCart = (id: string): Boolean => {
-    const item: cart_record | null = Cart.find(elem => elem.id === id) ?? null
+    const item: CartItem | null = Cart.find(elem => elem.index === id) ?? null
     return (!!item)
   }
 
   const removeItemFromCart = (id: string): Boolean => {
-    const index: number | undefined = Cart.findIndex(elem => elem.id === id)
+    const index: number | undefined = Cart.findIndex(elem => elem.index === id)
     if (index == undefined) return false // no record found
     Cart.splice(index, 1)
     updateCartStatus()
@@ -66,14 +61,14 @@ const useCart = () => {
   }
 
   const getListItemsInCart = (watch_value: number): string[] => {
-    return Cart.map(elem => elem.id)
+    return Cart.map(elem => elem.index)
   }
 
-  const getCart = (watch_value: number): cart_record_output[] => {
+  const getCart = (watch_value: number): CartItem[] => {
     return Cart.map(elem => {
-      const prod : Product | null = products.find(e => e.index === elem.id) ?? null
+      const prod : Product | null = products.find(e => e.index === elem.index) ?? null
       return {
-        id: elem.id,
+        index: elem.index,
         quantity: elem.quantity,
         name: prod?.title,
         price: prod?.price ? cleaned_price(prod.price) : 0
@@ -83,7 +78,7 @@ const useCart = () => {
   }
 
   const updateQuantityInCart = (id: string, delta: number) => {
-    const index: number | undefined = Cart.findIndex(elem => elem.id === id)
+    const index: number | undefined = Cart.findIndex(elem => elem.index === id)
     Cart[index].quantity += delta
     if (Cart[index].quantity <= 0) Cart.splice(index, 1)
       updateCartStatus()

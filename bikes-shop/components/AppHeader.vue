@@ -70,7 +70,7 @@ const acc_click = (index: number) => {
         </v-list>
           <v-list density="compact" nav>
             <v-list-item v-for="(accessory, index) in accessories" :key="index">
-              <v-list-item-title @click="acc_click(index)">{{ accessory }}</v-list-item-title>
+              <v-list-item-title style="cursor:pointer;" @click="acc_click(index)">{{ accessory }}</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>

@@ -5,8 +5,8 @@ declare global {
   interface Category {
     ua : string
     en: string
-    short : string
-    list? : string[]
+    short? : string
+    list? : {en: string, ua: string}[]
   }
 
   interface Feature {
@@ -86,13 +86,19 @@ const setFilter = (mode : string, value : any) => {
       else category.value = categories[value - 1]
       console.log("Tab filter set to:", filter.mode, category.value);
     }
+    else if (mode == "acc") 
+      {
+      filter.mode = mode
+      category.value = categories[6].list ? categories[6].list[value] : {ua: '', en: ''} 
+      console.log("Tab filter set to:", filter.mode, category.value);
+    }
 }
 
   return {
     ProdGetItem,
     ProdFindItemByName,
     ProdSearch,
-    getCategoriesList: () => categories,
+    getCategoriesList: () => categories.filter( (item) => item.list === undefined),
     getCategoryProducts,
     setFilter,
     category // reactive
