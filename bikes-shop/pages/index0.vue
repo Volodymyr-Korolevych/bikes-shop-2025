@@ -3,10 +3,10 @@
         <!-- Банер на весь екран -->
         <div class="hero-banner d-flex flex-column justify-center align-center">
             <div class="hero-overlay">
-                <h1 class="text-white text-4xl font-bold mb-2">Все для активного життя</h1>
-                <p class="text-white mb-6">Найкращі велосипеди та аксесуари — обери свій маршрут</p>
+                <h1 class="text-white text-4xl font-bold mb-2">Веломагазин</h1>
+                <p class="text-white mb-6">Все для подорожей, спорту й щоденних поїздок</p>
                 <v-btn color="white" variant="outlined" @click="$router.push('/products')">
-                    Обрати товар
+                    Перейти до каталогу
                 </v-btn>
             </div>
         </div>
@@ -30,17 +30,15 @@ const recommended = getCategoryProducts(1).slice(0, 4) // перші 4 това�
 
 <style scoped>
 .hero-banner {
-    background-image: url('./images/banner.jpeg');
+    background-image: url('/banner.jpg');
     background-size: cover;
     background-position: center;
     height: 90vh;
     position: relative;
-    filter: brightness(0.6) blur(1px);
 }
 
 .hero-overlay {
-    backdrop-filter: blur(2px);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
     height: 100%;
     display: flex;

@@ -13,27 +13,23 @@ const _click = async (i: any) => {
 <template>
     <v-navigation-drawer permanent expand-on-hover rail width="350">
         <v-list>
-            <v-list-item 
-            title="Асортимент велосипедів">
-            <template v-slot:prepend>
-                     <v-avatar 
-                       image="/favicon.ico"
-                       rounded="0"
-                    >
+            <v-list-item title="Асортимент велосипедів">
+                <template v-slot:prepend>
+                    <v-avatar image="/favicon.ico" rounded="0">
                     </v-avatar>
-                    </template>
-        
-        
-        </v-list-item>
+                </template>
+
+
+            </v-list-item>
         </v-list>
         <v-list density="compact" nav>
             <v-list-item v-for="(cat, i) in categories" key="i" :title="cat.ua" :value="i" @click="_click(i + 1)"
-                    style="white-space: initial !important;">
+                style="white-space: initial !important;">
                 <template v-slot:prepend>
-                    <div style="width: 40px;min-height: 16px;"
-                        rounded="0">&nbsp;
-                </div>
-                </template> 
+                    <v-avatar color="rgb(189, 189, 189)" rounded="0">
+                        <span style="color: white; font-weight: bold; font-size: .8rem;">{{ cat.ua.charAt(0) }}</span>
+                    </v-avatar>
+                </template>
 
             </v-list-item>
         </v-list>
