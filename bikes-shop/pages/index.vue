@@ -35,7 +35,7 @@ const recommended = getCategoryProducts(1).slice(0, 4) // перші 4 това�
     background-position: center;
     height: 90vh;
     position: relative;
-    filter: brightness(0.6) blur(1px);
+    /*filter: brightness(0.6) blur(1px);*/
 }
 
 .hero-overlay {
