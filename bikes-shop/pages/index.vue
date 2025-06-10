@@ -30,7 +30,7 @@ const recommended = getCategoryProducts(1).slice(0, 4) // перші 4 това�
 
 <style>
 .hero-banner {
-    background-image: url('@/images/banner.jpeg');
+    background-image: url('/images/banner.jpeg');
     background-size: cover;
     background-position: center;
     height: 90vh;
