@@ -28,7 +28,7 @@ const { getCategoryProducts } = useProducts()
 const recommended = getCategoryProducts(1).slice(0, 4) // перші 4 товари
 </script>
 
-<style scoped>
+<style>
 .hero-banner {
     background-image: url('./images/banner.jpeg');
     background-size: cover;

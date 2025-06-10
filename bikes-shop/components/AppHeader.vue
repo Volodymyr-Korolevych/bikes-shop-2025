@@ -85,6 +85,9 @@ const acc_click = (index: number) => {
 #tabs_age {
 flex-grow: 1;
 }
+.v-slide-group__content {
+  justify-content: space-around;
+}
 
 #tabs_age label.v-label.v-field-label {
   font-size: 12px;
