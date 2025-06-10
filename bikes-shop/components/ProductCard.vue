@@ -27,67 +27,82 @@ const props = defineProps({
 });
 const item = props.product as any as Product
 </script>
+
 <template>
-            <nuxt-link :to="`/BikeProduct?bike=${item.index}`" style="text-decoration: none !important;">
-               <v-card class="product-card ma-2 pt-4 d-flex flex-column justify-center align-center"
-                  style="height: 46vh;background-color: aliceblue;">
-                  <template v-slot:prepend>
-                     <v-img :src="`/small_images/${item.index}.png`" height="auto" width="15vw" />
-                  </template> 
-                  <v-card-subtitle
-                     style="font-size:.8rem; color:black; font-weight: 600;text-align: center;  white-space: initial !important;">
-                     {{ item.title }}
-                  </v-card-subtitle>
-                  <v-card-actions>
-                     <v-list-item class="d-flex">
-                        <v-list-item-subtitle>
-                           <span style="padding:5px;font-weight: 700;font-size: 20px;">
-                              {{ item.price }}
-                           </span>
-                        </v-list-item-subtitle>
-
-                        <template v-slot:append>
-                           <div class="justify-self-end">
-                              <v-icon class="me-1" icon="mdi-cart-outline" style="font-size: 40px;color:black;"
-                                 :class="(itemsInCart.includes(item.index)) ? 'color-red' : ''"
-                                 @click.stop.prevent="add_to_cart(item.index)">
-                              </v-icon>
-                           </div>
-                        </template>
-                     </v-list-item>
-                  </v-card-actions>
-               </v-card>
-            </nuxt-link>
+    <nuxt-link :to="`/BikeProduct?bike=${item.index}`" style="text-decoration: none !important;">
+  <v-card class="product-card" elevation="1" rounded="xl">
+    <div class="product-image-container">
+      <v-img
+        :src="`/big_images/${item.index}.png`"
+        height="200"
+        contain
+        class="product-image"
+        alt="Зображення товару"
+      />
+    </div>
+    <v-card-item class="pa-3 d-flex flex-column justify-space-between flex-grow-1">
+      <div class="product-title">{{ item.title }}</div>
+      <div class="product-bottom mt-auto mx-4">
+        <div class="product-price">{{ item.price }}</div>
+        <v-btn icon @click.stop.prevent="add_to_cart(item.index)">
+          <v-icon :color="itemsInCart.includes(item.index) ? 'deep-orange' : 'primary'">mdi-cart-plus</v-icon>
+        </v-btn>
+      </div>
+    </v-card-item>
+  </v-card>
+  </nuxt-link>
 </template>
-<style>
 
-.product-card .v-card-item__prepend {
-   padding-inline-end: 0 !important;
-}
-.product-card .v-list-item__append {
-   width: 50px !important;
-}
 
-.product-card .v-card-subtitle {
-   opacity: 1 !important;
-}
 
-.product-card .v-card-actions {
-   width: 100%;
-   padding: 0 !important;
-}
-.product-card .v-list-item__content {
-   width: 200px;
-   flex-shrink: 1;
-}
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap');
 
-.product-card .v-list-item-subtitle {
-   height: 24px;
-   margin: 7px;
-   opacity: 1 !important;
+.product-card {
+  font-family: 'Manrope', sans-serif;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  padding: 0;
 }
-
-.color-red {
-   color: red !important;
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+.product-image-container {
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+  padding: 8px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+.product-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: #212121;
+  line-height: 1.3;
+  min-height: 38px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-price {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: black;
+}
+.product-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>

@@ -34,7 +34,7 @@ const acc_click = (index: number) => {
 
     <div class="minicart" @click.stop="activateCart(true)">
         <div class="cart-block" style="cursor: pointer;caret-color: transparent !important;">
-          <svg-cart />
+          <v-icon class="cart-icon" size="24" color="black">mdi-cart-plus</v-icon>
           <span v-if="cartStatus.count > 0" class="label_count ">{{ cartStatus.count }}</span>
           <span class="total-price">
             <span class="cart-text">Кошик: </span>
